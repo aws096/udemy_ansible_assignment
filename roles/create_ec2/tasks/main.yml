@@ -1,0 +1,28 @@
+---
+- name: Launch instances
+  ec2:
+    key_name: "{{ keypair }}"
+    region: "{{ region }}"
+    image: "{{ ami }}"
+    wait: yes
+    instance_type: "{{ instance_type }}"
+    instance_tags: "{{ ec2_tags }}"
+    group: "{{ ec2_groups }}"
+    exact_count: "{{ count }}"
+    count_tag: 
+      Env: "{{ count_env }}"
+      Name: "{{ count_name }}"
+    vpc_subnet_id: "{{ subnet }}"
+    volumes: "{{ volumes }}"
+    assign_public_ip: yes
+  register: launched
+  tags: launch
+
+- name: Wait for SSH to come up
+  wait_for:
+    host: "{{ item[check.ip] }}"
+    port: "{{ check.port }}"
+    delay: 60
+    timeout: 900
+    state: started
+  with_items: "{{ launched.instances }}"

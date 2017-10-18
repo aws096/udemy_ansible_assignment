@@ -1,0 +1,8 @@
+---
+ec2_tags:
+  Name: "WebServer1"
+count_env: "WebServer1"
+count_name: "WebServer1"
+check:
+  ip: public_ip
+  port: 22

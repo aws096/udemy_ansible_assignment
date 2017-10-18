@@ -1,0 +1,17 @@
+- name: Terminate existing WebServer1 instance
+  hosts: webserver1
+  connection: local
+  vars_files:
+    - vars/common.yml
+    - vars/webserver1.yml
+  roles:
+    - terminate_ec2
+
+- name: Deploy WebServer1 EC2 instance
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vars/common.yml
+    - vars/webserver1.yml
+  roles:
+    - create_ec2

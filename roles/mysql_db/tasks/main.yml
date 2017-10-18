@@ -1,0 +1,34 @@
+- name: Install MySQL database
+  apt: name={{ item }} state=installed
+  with_items:
+    - mysql-server
+    - mysql-client
+
+- name: Install MySQL-python dependency
+  pip: 
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - MySQL-python
+
+# I have to use the start of the service this way, because service module
+# doesn't seem to start the service
+- name: Start MySQL service
+  shell: service mysql start
+
+- name: Start MySQL service
+  service: 
+    name: mysql
+    enabled: yes
+
+- name: Create Application Database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+
+- name: Create Database user
+  mysql_user: 
+    name: '{{ db_user }}'
+    password: '{{ db_password }}'
+    priv: '*.*:ALL'
+    state: present
