@@ -1,14 +1,12 @@
 ---
 relaunch: False
 region: "eu-central-1"
-ec2_groups: ["myWebDMZ"]
+security_groups: ["myWebDMZ"]
 iam_role: ""
 keypair: "MyEC2KeyPair"
 ami: "ami-c7ee5ca8"
-subnet: "subnet-441ef42f"
 instance_type: "t2.micro"
 volumes: []
-elastic_ips: []
 count: 1
 check:
   ip: public_ip

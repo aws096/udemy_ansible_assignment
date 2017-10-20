@@ -1,6 +1,7 @@
 ---
 - name: Terminate current instances.
-  ec2:
+  local_action:
+    module: ec2
     state: 'absent'
     instance_ids: "{{ ec2_id }}"
     region: "{{ region }}"

@@ -1,0 +1,16 @@
+---
+- name: Create Elastic Load Balancer
+  local_action:
+    module: ec2_elb_lb
+    state: present
+    name: "{{ elb_name }}"
+    group: "{{ security_groups }}"
+    region: "{{ region }}"
+    subnets: "{{ subnets }}"
+    tags: "{{ elb_tags }}"
+    purge_subnets: yes
+    wait: yes
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
