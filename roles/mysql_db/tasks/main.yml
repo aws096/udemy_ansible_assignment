@@ -1,8 +1,9 @@
 - name: Install MySQL database
-  apt: name={{ item }} state=installed
+  yum: name={{ item }} state=installed
   with_items:
+    - mysql
     - mysql-server
-    - mysql-client
+    - mysql-devel
 
 - name: Install MySQL-python dependency
   pip: 
@@ -14,11 +15,11 @@
 # I have to use the start of the service this way, because service module
 # doesn't seem to start the service
 - name: Start MySQL service
-  shell: service mysql start
+  shell: service mysqld start
 
 - name: Start MySQL service
   service: 
-    name: mysql
+    name: mysqld
     enabled: yes
 
 - name: Create Application Database

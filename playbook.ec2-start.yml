@@ -1,6 +1,5 @@
 - name: Provision WebServer1 EC2 instance
   hosts: localhost
-  connection: local
   vars_files:
     - vars/common.yml
     - vars/webserver1.yml
@@ -9,7 +8,6 @@
 
 - name: Provision WebServer2 EC2 instance
   hosts: localhost
-  connection: local
   vars_files:
     - vars/common.yml
     - vars/webserver2.yml
@@ -18,18 +16,8 @@
 
 - name: Provision Database EC2 instance
   hosts: localhost
-  connection: local
   vars_files:
     - vars/common.yml
     - vars/database.yml
   roles:
     - create_ec2
-
-- name: Provision Elastic Load Balancer 
-  hosts: localhost
-  connection: local
-  vars_files:
-    - vars/common.yml
-    - vars/elb.yml
-  roles:
-    - create_elb

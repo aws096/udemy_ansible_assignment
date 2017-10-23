@@ -7,7 +7,16 @@
     - flask-mysql
 
 - name: Copy source code
-  copy: src=app.py dest=/opt/app.py
+  copy:
+    src: "{{ role_path }}/files/app.py"
+    dest: /opt/app.py
+
+- name: Change file permissions
+  file:
+    path: /opt/app.py
+    mode: 0764
 
 - name: Start Web Server
-  shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+  shell: python /opt/app.py
+  environment:
+    MYSQL_DATABASE_HOST: "{{ hostvars['database'].ec2_ip_address }}"

@@ -1,10 +1,14 @@
 - name: Install all required dependencies
-  apt: name={{ item }} state=installed
+  yum: name={{ item }} state=installed
   with_items:
     - python
     - python-setuptools
-    - python-dev
-    - build-essential
+    - python-devel
+    - glibc-devel
+    - gcc
+    - patch
     - python-pip
-    - libmysqlclient-dev
-    - python-mysqldb
+    - MySQL-python
+    - gcc-c++
+    - libxml2-python
+    - libxml2-devel

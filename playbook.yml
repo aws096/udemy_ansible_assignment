@@ -1,4 +1,46 @@
-- name: Check if webserver1 is live
-  hosts: webserver1,webserver2
+- name: Deploy a DB server
+  hosts: database
+  vars_files:
+    - vars/common.yml
   roles:
-    - 
+    - role: python
+      become: yes
+      become_method: sudo
+      become_user: root
+    - role: mysql_db
+      become: yes
+      become_method: sudo
+      become_user: root
+
+- name: Deploy a web server
+  hosts: webserver1,webserver2
+  vars_files:
+    - vars/common.yml
+  roles:
+    - role: python
+      become: yes
+      become_method: sudo
+      become_user: root
+    - role: flask_web
+      become: yes
+      become_method: sudo
+      become_user: root
+
+#- name: Provision Elastic Load Balancer 
+#  hosts: localhost
+#  vars_files:
+#    - vars/common.yml
+#    - vars/elb.yml
+#  roles:
+#    - role: create_elb
+## Gather facts about all ELBs
+#- name: Provision Elastic Load Balancer 
+#  hosts: localhost
+#  tasks:
+#    - action:
+#      module: ec2_elb_facts
+#      register: elb_facts
+#    - action:
+#      module: debug
+#      msg: "{{ item.dns_name }}"
+#      with_items: "{{ elb_facts.elbs }}"
