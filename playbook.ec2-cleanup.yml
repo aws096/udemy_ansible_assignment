@@ -1,0 +1,17 @@
+---   
+- name: Destroy Elastic Load Balancer 
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vars/common.yml
+    - vars/elb.yml
+  roles:
+    - remove_elb
+
+- name: Terminate existing EC2 instances
+  hosts: webserver1,webserver2,database
+  connection: local
+  vars_files:
+    - vars/common.yml
+  roles:
+    - terminate_ec2

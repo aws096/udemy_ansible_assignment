@@ -1,7 +1,7 @@
 ---
-elb_name: "Webserver_ELB"
+elb_name: "WebserverELB"
 elb_tags:
-  Name: "Webserver_ELB"
-count_env: "Webserver_ELB"
-count_name: "Webserver_ELB"
+  Name: "WebserverELB"
+count_env: "WebserverELB"
+count_name: "WebserverELB"
 subnets: "subnet-441ef42f,subnet-4e17fc03,subnet-686f5a12"

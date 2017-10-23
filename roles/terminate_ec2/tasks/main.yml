@@ -1,5 +1,5 @@
 ---
-- name: Terminate current instances.
+- name: Terminate current EC2 instance
   local_action:
     module: ec2
     state: 'absent'

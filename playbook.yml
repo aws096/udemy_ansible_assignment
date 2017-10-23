@@ -1,5 +1,4 @@
 - name: Check if webserver1 is live
-  hosts: webserver1
-  tasks:
-    - name: Ping the webserver1
-      ping:
+  hosts: webserver1,webserver2
+  roles:
+    - 

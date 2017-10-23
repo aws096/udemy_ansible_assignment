@@ -1,7 +1,0 @@
-- name: Terminate existing WebServer1 instance
-  hosts: webserver1,webserver2,database
-  connection: local
-  vars_files:
-    - vars/common.yml
-  roles:
-    - terminate_ec2

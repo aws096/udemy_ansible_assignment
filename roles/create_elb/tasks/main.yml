@@ -4,7 +4,8 @@
     module: ec2_elb_lb
     state: present
     name: "{{ elb_name }}"
-    group: "{{ security_groups }}"
+    security_group_ids: "{{ security_groups }}"
+    instance_ids: "{{ hostvars[item].ec2_id }}"
     region: "{{ region }}"
     subnets: "{{ subnets }}"
     tags: "{{ elb_tags }}"
@@ -14,3 +15,14 @@
       - protocol: http
         load_balancer_port: 80
         instance_port: 80
+    health_check:
+      ping_protocol: http
+      ping_port: 5000/how%20are%20you
+      response_timeout: 5
+      interval: 10
+      unhealthy_threshold: 2
+      healthy_threshold: 4
+  register: result
+  with_items:
+    - webserver1
+    - webserver2

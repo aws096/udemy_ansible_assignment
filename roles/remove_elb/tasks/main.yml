@@ -1,7 +1,8 @@
 ---
-- name: Terminate current instances.
-- local_action:
+- name: Terminate current ELB instance
+  local_action:
     module: ec2_elb_lb
     name: "{{ elb_name }}"
+    region: "{{ region }}"
     state: absent
     wait: yes

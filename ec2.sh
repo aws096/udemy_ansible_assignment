@@ -1,8 +1,13 @@
 #!/bin/bash
 
-terminate() {
-    echo "Terminating EC2 instances"
-    ansible-playbook -i inventories/ec2.py playbook.ec2-terminate.yml
+export SOURCE_FOLDER=$(dirname "$0")
+cd ${SOURCE_FOLDER}
+
+source aws.conf
+
+cleanup() {
+    echo "Terminating EC2 instances and removing ELB"
+    ansible-playbook -i inventories/ec2.py playbook.ec2-cleanup.yml
 }
 start() {
     echo "Starting EC2 instances"
@@ -14,8 +19,8 @@ deploy() {
 
 }
 case "$1" in
-    terminate)
-        terminate
+    cleanup)
+        cleanup
         ;;
     start)
         start
@@ -24,7 +29,7 @@ case "$1" in
         deploy
         ;;
     *)
-        echo "Usage: ./$(basename "$0") {terminate|start|deploy}"
+        echo "Usage: ./$(basename "$0") {cleanup|start|deploy}"
         exit 1
         ;;
 esac

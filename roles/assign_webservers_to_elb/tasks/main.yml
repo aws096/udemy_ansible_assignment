@@ -1,0 +1,11 @@
+---
+- name: Create Elastic Load Balancer
+  local_action:
+    module: ec2_elb_lb
+    name: "{{ elb_name }}"
+    instance_ids: "{{ hostvars[item].ec2_id }}"
+    state: present
+  register: result
+  with_items:
+    - webserver1
+    - webserver2
