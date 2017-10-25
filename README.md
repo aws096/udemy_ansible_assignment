@@ -1,14 +1,14 @@
 # Ansible Assignment
 
 This is the solution for ansible assignment from Ansible Advanced course.
-This solution contains:
+  This solution contains:
   - AWS EC2 instances for webservers and database
   - AWS Elastic Load Balancer for webservers
   - simple web application using [Python Flask](http://flask.pocoo.org/)
   - [MySQL](https://www.mysql.com/) database
 
 
-Below are the steps required to get this working.
+  Below are the steps required to get this working.
 
   - Prerequisities
   - Configuration
@@ -34,12 +34,19 @@ Below are the steps required to get this working.
   - use your credentials in AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY properties
   - provide your amazon login url in EC2_URL property
   - copy your AWS .pem key file to the root folder of the project and provide the key file name in AWS_KEY_NAME property
+  
+  Rename mail.yml.example to mail.yml and edit the file:
+
+  - your gmail account name in gmail_username variable
+  - your gmail password in gmail_password variable (or application password if you are using 2-factor authentication)
+  - to whom should be the email sent in mail_send_to variable
 
   Edit variables in vars files according to your needs:
   - common.yml
   - database.yml
   - ec2.ini
   - elb.yml
+  - mail.yml
   - webserver1.yml
   - webserver2.yml
 

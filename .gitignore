@@ -1,3 +1,4 @@
 aws.conf
 MyEC2KeyPair.pem
 *.retry
+vars/mail.yml

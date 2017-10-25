@@ -9,3 +9,12 @@
   action:
     module: debug
     msg: "http://{{ elb_facts.elbs.0.dns_name }}"
+- mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "{{ gmail_username }}"
+    password: "{{ gmail_password }}"
+    to: "{{ mail_send_to }}"
+    subject: Ansible-report
+    body: "Flask webapp has been successfully deployed.\n\nLinks to the application:\n- http://{{ elb_facts.elbs.0.dns_name }}/   => Welcome\n- http://{{ elb_facts.elbs.0.dns_name }}/how%20are%20you   => I am good, how about you?\n- http://{{ elb_facts.elbs.0.dns_name }}/read%20from%20database   => JOHN"
+  delegate_to: localhost
