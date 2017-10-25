@@ -8,14 +8,13 @@ This is the solution for ansible assignment from Ansible Advanced course.
   - [MySQL](https://www.mysql.com/) database
 
 
-  Below are the steps required to get this working.
-
-  - Prerequisities
+  Below are the steps required to get this working:
+  - AWS Prerequisities
   - Configuration
-  - Install and Configure Database
-  - Start Database Service
-  - Install and Configure Web Server
-  - Start Web Server
+  - Start EC2 instances
+  - Deploy webapp, database and ELB
+  - Test
+  - Cleanup everything
 
 ## 0. AWS Prerequisities
   
