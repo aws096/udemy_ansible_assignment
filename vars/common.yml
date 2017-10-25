@@ -1,7 +1,7 @@
 ---
 relaunch: False
 region: "eu-central-1"
-security_groups: ["sg-1913fb73"]
+security_groups: "sg-1913fb73"
 iam_role: ""
 keypair: "MyEC2KeyPair"
 ami: "ami-c7ee5ca8"

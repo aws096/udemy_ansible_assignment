@@ -1,6 +1,0 @@
----
-ec2_tags:
-  Name: "WebServer2"
-count_env: "WebServer2"
-count_name: "WebServer2"
-subnet: "subnet-686f5a12"

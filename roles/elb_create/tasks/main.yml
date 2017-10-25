@@ -14,14 +14,14 @@
     listeners:
       - protocol: http
         load_balancer_port: 80
-        instance_port: 80
+        instance_port: 5000
     health_check:
       ping_protocol: http
-      ping_port: 5000/how%20are%20you
+      ping_port: 5000/
       response_timeout: 5
       interval: 10
-      unhealthy_threshold: 2
-      healthy_threshold: 4
+      unhealthy_threshold: 4
+      healthy_threshold: 2
   register: result
   with_items:
     - webserver1

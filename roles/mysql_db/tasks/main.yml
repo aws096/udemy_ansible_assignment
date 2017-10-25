@@ -1,3 +1,4 @@
+---
 - name: Install MySQL database
   yum: name={{ item }} state=installed
   with_items:
@@ -7,10 +8,15 @@
 
 - name: Install MySQL-python dependency
   pip: 
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   with_items:
     - MySQL-python
+
+- name: Copy database dump file
+  copy:
+    src: files/dump.sql
+    dest: /tmp
 
 # I have to use the start of the service this way, because service module
 # doesn't seem to start the service
@@ -24,12 +30,30 @@
 
 - name: Create Application Database
   mysql_db:
-    name: '{{ db_name }}'
+    name: "{{ db_name }}"
     state: present
 
 - name: Create Database user
   mysql_user: 
-    name: '{{ db_user }}'
-    password: '{{ db_password }}'
-    priv: '*.*:ALL'
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "*.*:ALL,GRANT"
+    host: "{{ item }}"
     state: present
+  with_items:
+    - "{{ hostvars['webserver1'].ec2_ip_address }}"
+    - "{{ hostvars['webserver2'].ec2_ip_address }}"
+    - "127.0.0.1"
+    - "::1"
+    - "localhost"
+
+- name: Restart MySQL service
+  shell: service mysqld restart
+
+- name: Restore database
+  mysql_db:
+    name: "{{ db_name }}"
+    login_user: "{{ db_user }}"
+    login_password: "{{ db_password }}"
+    target: /tmp/dump.sql
+    state: import

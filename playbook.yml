@@ -26,21 +26,11 @@
       become_method: sudo
       become_user: root
 
-#- name: Provision Elastic Load Balancer 
-#  hosts: localhost
-#  vars_files:
-#    - vars/common.yml
-#    - vars/elb.yml
-#  roles:
-#    - role: create_elb
-## Gather facts about all ELBs
-#- name: Provision Elastic Load Balancer 
-#  hosts: localhost
-#  tasks:
-#    - action:
-#      module: ec2_elb_facts
-#      register: elb_facts
-#    - action:
-#      module: debug
-#      msg: "{{ item.dns_name }}"
-#      with_items: "{{ elb_facts.elbs }}"
+- name: Provision Elastic Load Balancer
+  hosts: localhost
+  vars_files:
+    - vars/common.yml
+    - vars/elb.yml
+  roles:
+    - elb_create
+    - elb_print_dns

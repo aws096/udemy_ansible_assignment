@@ -1,6 +1,7 @@
+---
 - name: Install Python Flask dependency
   pip: 
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   with_items:
     - flask
@@ -16,7 +17,13 @@
     path: /opt/app.py
     mode: 0764
 
+- name: Stop Web Server if running
+  shell: PID=`ps aux | grep -v grep | grep /opt/app.py | awk 'NR==1{print $2}'`; if [[ "" !=  "$PID" ]]; then kill -9 $PID; fi;
+
 - name: Start Web Server
-  shell: python /opt/app.py
+  shell: nohup python /opt/app.py &
   environment:
     MYSQL_DATABASE_HOST: "{{ hostvars['database'].ec2_ip_address }}"
+    MYSQL_DATABASE_USER: "{{ db_user }}"
+    MYSQL_DATABASE_PASSWORD: "{{ db_password }}"
+    MYSQL_DATABASE_DB: "{{ db_name }}"

@@ -1,6 +1,0 @@
----
-ec2_tags:
-  Name: "Database"
-count_env: "Database"
-count_name: "Database"
-subnet: "subnet-4e17fc03"

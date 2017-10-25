@@ -2,3 +2,4 @@ export EC2_INI_PATH=<path_to_project>/vars/ec2.ini
 export AWS_ACCESS_KEY_ID='AWS_ACCESS_KEY_ID'
 export AWS_SECRET_ACCESS_KEY='AWS_SECRET_ACCESS_KEY'
 export EC2_URL='https://<aws_sign_in_name>.signin.aws.amazon.com/console'
+export AWS_KEY_NAME=<key_file_name>.pem

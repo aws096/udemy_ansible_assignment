@@ -1,0 +1,11 @@
+---
+- name: Gather facts about ELB
+  action:
+    module: ec2_elb_facts
+    names: "{{ elb_name }}"
+    region: "{{ region }}"
+  register: elb_facts
+- name: Print ELB DNS
+  action:
+    module: debug
+    msg: "http://{{ elb_facts.elbs.0.dns_name }}"
